@@ -61,7 +61,7 @@ function isLeapYear(date) {
 	var v1 = date.getFullYear() % 4;
 	var v2 = date.getFullYear() % 100;
 	var v3 = date.getFullYear() % 400;
-	/*
+	
    if((v1) != 0){
 	  return false; 
    }else{
@@ -74,11 +74,6 @@ function isLeapYear(date) {
 			   return true;
 		   }
 	   }
-   }*/
-   if ((v1 == 0) && (v2 != 0) || (v3 == 0)){
-	   return true;
-   }else{
-	   return false;
    }
 }
 
@@ -100,10 +95,41 @@ function isLeapYear(date) {
  */
 function timeSpanToString(startDate, endDate) {
     var str = new String;
-	str = str.concat(endDate.getUTCHours() - startDate.getUTCHours(),':',
-    endDate.getMinutes() - startDate.getMinutes(), ":", 
-   endDate.getSeconds() - startDate.getSeconds(), ".", 
-   endDate.getMilliseconds() - startDate.getMilliseconds());
+	
+	if((endDate.getUTCHours() - startDate.getUTCHours()) < 10){
+		str = str.concat('0',endDate.getUTCHours() - startDate.getUTCHours(),':');
+	}
+	else{
+		str = str.concat(endDate.getUTCHours() - startDate.getUTCHours(),':');
+	}
+	
+	if((endDate.getMinutes() - startDate.getMinutes()) < 10){
+		str = str.concat('0',endDate.getMinutes() - startDate.getMinutes(),':');
+	}
+	else{
+		str = str.concat(endDate.getMinutes() - startDate.getMinutes(),':');
+	}
+	
+	if((endDate.getSeconds() - startDate.getSeconds()) < 10){
+		str = str.concat('0',endDate.getSeconds() - startDate.getSeconds(), ".");
+	}
+	else{
+		str = str.concat(endDate.getSeconds() - startDate.getSeconds(), ".");
+	}
+	
+    if((endDate.getMilliseconds() - startDate.getMilliseconds()) < 100 && endDate.getMilliseconds() - startDate.getMilliseconds()>10){
+		str = str.concat('0',endDate.getMilliseconds() - startDate.getMilliseconds());
+	}
+	else{
+		if(endDate.getMilliseconds() - startDate.getMilliseconds() < 10)
+		str = str.concat('00',endDate.getMilliseconds() - startDate.getMilliseconds());
+	}
+	
+	if((endDate.getMilliseconds() - startDate.getMilliseconds()) > 100){
+		str = str.concat(endDate.getMilliseconds() - startDate.getMilliseconds());
+	}
+	
+	
    return str;
 }
 
@@ -122,17 +148,11 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-  // var val = (date.getHours() + (date.getMinutes()/60))* 30 - date.getMinutes() * 6
-   var val = 0.5 * (60 * date.getUTCHours() + date.getUTCMinutes()) - 6 * date.getUTCMinutes();
-   if (val > 360){
-	   val = val % 360;
+   var val = (date.getUTCHours() + (date.getUTCMinutes()/60))* 30 - date.getUTCMinutes() * 6
+   while(val > 180){
+	   val = val - 360;
    }
-	   
-   if(val < 360 && val > 180){
-		   val = val % 180;
-	}
-	
-   return ((val)/180) * Math.PI;
+   return Math.abs(val) * Math.PI/180;
 }
 
 
