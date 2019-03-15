@@ -22,7 +22,8 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+   var date = new Date(value);
+   return date;
 }
 
 /**
@@ -37,7 +38,8 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+   var date = new Date(value);
+   return date;
 }
 
 
@@ -56,7 +58,28 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+	var v1 = date.getFullYear() % 4;
+	var v2 = date.getFullYear() % 100;
+	var v3 = date.getFullYear() % 400;
+	/*
+   if((v1) != 0){
+	  return false; 
+   }else{
+	   if((v2) != 0){
+		   return true;
+	   }else{
+		   if((v3) != 0){
+			   return false;
+		   }else{
+			   return true;
+		   }
+	   }
+   }*/
+   if ((v1 == 0) && (v2 != 0) || (v3 == 0)){
+	   return true;
+   }else{
+	   return false;
+   }
 }
 
 
@@ -76,7 +99,12 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
+    var str = new String;
+	str = str.concat(endDate.getUTCHours() - startDate.getUTCHours(),':',
+    endDate.getMinutes() - startDate.getMinutes(), ":", 
+   endDate.getSeconds() - startDate.getSeconds(), ".", 
+   endDate.getMilliseconds() - startDate.getMilliseconds());
+   return str;
 }
 
 
@@ -94,7 +122,17 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+  // var val = (date.getHours() + (date.getMinutes()/60))* 30 - date.getMinutes() * 6
+   var val = 0.5 * (60 * date.getUTCHours() + date.getUTCMinutes()) - 6 * date.getUTCMinutes();
+   if (val > 360){
+	   val = val % 360;
+   }
+	   
+   if(val < 360 && val > 180){
+		   val = val % 180;
+	}
+	
+   return ((val)/180) * Math.PI;
 }
 
 
