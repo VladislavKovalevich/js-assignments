@@ -206,7 +206,7 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-throw new Error('Not implemented');
+  throw new Error('Not implemented');
 }
 
 /**
@@ -242,7 +242,7 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-throw new Error('Not implemented');
+   throw new Error('Not implemented');
 }
 
 /**
@@ -465,7 +465,8 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]   
  */
 function getIdentityMatrix(n) {
-throw new Error('Not implemented');
+	
+  throw new Error('Not implemented');
 }
 
 /**
@@ -589,7 +590,35 @@ function getElementByIndexes(arr, indexes) {
  * 
  */
 function swapHeadAndTail(arr) {
-	throw new Error('Not implemented');
+	var arr1,arr2 = new Array();
+	
+	if(arr.length == 1){
+	   return arr;
+	}
+	else{
+	
+	if(arr.length % 2 == 0 && arr.length > 1){
+	arr1 = arr.filter(function(el,index,arr){
+		return index < (arr.length)/2;
+	});
+	
+	arr2 = arr.filter(function(el,index,arr){
+		return index >= (arr.length)/2;
+	});
+     return arr2.concat(arr1);
+	}
+	else{
+		arr1 = arr.filter(function(el,index,arr){
+		return index < ((arr.length - 1)/2);
+	});
+	
+	arr2 = arr.filter(function(el,index,arr){
+		return index > ((arr.length - 1)/2);
+	});
+	
+	 return arr2.concat(arr[(arr.length - 1)/2], arr1);
+	}
+	}
 }
 
 
