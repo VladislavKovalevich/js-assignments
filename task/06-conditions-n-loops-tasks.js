@@ -551,10 +551,7 @@ throw new Error('Not implemented');
  *
  */
 function getMatrixProduct(m1, m2) {
-    for(var i = 0; i < m1.length; i++){
-			m3 = m1[i]*m2[iexi][1];
-		}
-	};
+   throw new Error('Not implemented');
 }
 
 
