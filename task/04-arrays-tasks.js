@@ -206,7 +206,7 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-  throw new Error('Not implemented');
+  return arr.join('\n');
 }
 
 /**
@@ -242,7 +242,17 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-   throw new Error('Not implemented');
+    var arr2 = arr.map(function(current, index1, array1){
+		return array1.reduce(function(acc, cur, index2, array2){
+		   if(index2 <= index1) {
+			   return acc + cur;
+		   } else {
+			   return acc;
+		   }
+	    }, 0);
+    });
+	
+	return arr2;
 }
 
 /**
@@ -280,7 +290,16 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-   throw new Error('Not implemented');
+   var arr2 = arr.map(function(elem, index, array1){
+	   var arr3 = new Array();
+	   arr3.length = index + 1;
+	   arr3.fill(elem);
+	   return arr3;
+   });
+   
+   var arr3 = arr2.reduce((acc, val) => acc.concat(val), []);
+   
+   return arr3;
 }
 
 
@@ -341,7 +360,20 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-   throw new Error('Not implemented');
+   var arrdigs = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+
+   return arr.sort(function(a, b){
+	   
+	   var val1 = arrdigs.indexOf(a);
+	   var val2 = arrdigs.indexOf(b);
+	   
+	   if (val1 <= val2) {
+		   return -1;
+	   } else {
+		   return 1;
+	   }
+	   
+   });
 }
 
 /** 
@@ -357,7 +389,9 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-   throw new Error('Not implemented');
+   return arr.reduce(function(acc,cur,index,arr){
+	   return acc + cur;
+   },0);
 }
  
 /** 
@@ -443,7 +477,21 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
-   throw new Error('Not implemented');
+   return arr.sort(function(a, b){
+	   if (a.country < b.country) {
+		   return -1;
+	   } else {
+		   if (a.country > b.country) {
+			   return 1;
+		   } else {
+		       if (a.city < b.city) {
+			       return -1;
+		       } else {
+			       return 1;
+		       }
+		   }
+	   }
+   });
 }
 
 /**
@@ -465,8 +513,17 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]   
  */
 function getIdentityMatrix(n) {
+	var arr = new Array;
+	arr.length = n;
+	arr.fill(0);
 	
-  throw new Error('Not implemented');
+    return arr.map(function(elem, index, array1){
+	   var arr3 = new Array();
+	   arr3.length = n;
+	   arr3.fill(0);
+	   arr3[index] = 1;
+	   return arr3;
+   });
 }
 
 /**
@@ -483,7 +540,18 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-throw new Error('Not implemented');
+  var arr = new Array();
+  arr.length = end - start + 1;
+  arr.fill(0,0,end - start + 1);
+  arr[0] = start;
+  
+  return arr.map(function(el,index,arr){
+	  if(index > 0){
+		  return arr[0] + index;
+	  }else{
+		  return el;
+	  }
+  });
 }
 
 /**
