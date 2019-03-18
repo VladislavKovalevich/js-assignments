@@ -148,7 +148,7 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+
 }
 
 
@@ -431,22 +431,59 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-	/*var countOpen = 0;
-	var countClose = 0;
-	for(var i = 0; i < str.length; i++){
-		if(countClose > countOpen){
-			return false;
-		}else{
-		if(str.charAt(i) == '[' || str.charAt(i) == '(' || 
-		   str.charAt(i) == '{' || str.charAt(i) == '<'){
-			   countOpen++;
-		   }else{
-			   countClose++;
-		   }
+	var str2 = str;
+	var flag = true;
+	var i;
+	
+	var ar1 = ['[', '{', '(', '<'];
+	var ar2 = [']', '}', ')', '>'];
+	
+	while (flag) {
+		flag = false;
+		
+		for (i = 0; i < str2.length; i++) {
+			if (ar2.includes(str2.charAt(i))) {
+				var ch1 = ar1[ar2.indexOf(str2.charAt(i))];
+				var pos = str2.lastIndexOf(ch1, i);
+				
+				if (pos >= 0) {
+				    var str3 = "";
+					
+					var str4 = "";
+					if (i >= (pos + 1)) {
+						str4 = str2.substring(pos + 1, i);
+					}
+					
+					var fl = false;
+					if (str4.length > 0) {
+						fl = ar1.some(function(elem, index) {
+							return (str4.indexOf(elem) >= 0);
+						});
+					}
+					
+					if (pos >= 0) {
+						str3 = str3 + str2.substring(0, pos);
+					}
+					str3 = str3 + str4;
+				    if ((str2.length) >= (i + 1)) {
+						str3 = str3 + str2.substring(i + 1);
+					}
+
+				    i = str2.length + 2;
+					if (!fl) {
+			            str2 = str3;
+				        flag = true;
+					}
+				}
+			}
 		}
 	}
-	return countClose === countOpen;*/
-	throw new Error('Not implemented');
+	
+	if (str2.length == 0) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 
