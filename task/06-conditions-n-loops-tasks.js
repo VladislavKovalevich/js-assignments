@@ -148,7 +148,7 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-
+    throw new Error('Not implemented');
 }
 
 
@@ -313,66 +313,54 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-	/*var str = String(ccn);
+	var str = String(ccn);
 	var str2 = String();
 	var sum = 0;
 	var val = 0;
 	var count = 0;
 	
-	for(var i =str.length - 1; i >= 0; i--){
-		str2 = str2.concat(str.charAt(i));
+//	str2 = str.split("").reverse().join("");
+	str2 = str;
+	//console.log(str2);
+	var flag = false;
+	
+	if(str.length % 2 == 0){
+		flag = true
 	}
 	
-	for(var i = 0; i< str2.length; i++){
-	   if(i % 2 == 0 || i == 0){
-		   count = count + 1;
-	   }
-	}
+	//console.log(flag);
 	
-	if(count % 2 == 0){ 
+	
+	if(flag){ 
 	  //return true;
      for(var i = 0; i< str2.length; i++){
 	  	 val = Number(str2.charAt(i));
-		 if(i % 2 == 0 || i == 0){
-		  	 val = val * 2;
-			 if(val > 9){
-                 val = val - 9;
-			 }
-	 	 }
+		 if(i == 0 || i % 2 == 0){
+		   val = val * 2;
+		   if(val > 9){
+              val = val - 9;
+	 	   }
+		 }
+		// console.log(val);
 		 sum +=val;
 	   } 
 	}else{
 		//return false;
 	  for(var i = 0; i< str2.length; i++){
-	  	 val = Number(str2.charAt(i));
-		 if(i % 2 != 0 || i == 1){
-		  	 val = val * 2;
-			 if(val > 9){
-                 val = val - 9;
-			 }
-	 	 }
+	  	val = Number(str2.charAt(i));
+		if(i == 1 || i % 2 != 0){
+		  val = val * 2;
+		  if(val > 9){
+             val = val - 9;
+	    	}
+		}
+		// console.log(val);
 		 sum +=val;
 	   } 
+	  // console.log(sum);
 	}
-	return sum % 10 === 0;*/
-  /*let sum = 0;
-
-  for (let i = 0; i < ccn.length; i++) {
-    let cardNum = parseInt(ccn[i]);
-
-    if ((ccn.length - i) % 2 === 0) {
-      cardNum = cardNum * 2;
-
-      if (cardNum > 9) {
-        cardNum = cardNum - 9;
-      }
-    }
-
-    sum += cardNum;
-  }
-
-  return sum % 10 === 0;*/
-  throw new Error('Not implemented');
+	
+	return sum % 10 === 0;
 }
 
 
@@ -519,7 +507,30 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-throw new Error('Not implemented');
+   /* var str = new String();
+	//var m = endDate.getMinutes() - startDate.getMinutes();
+	var d = (endDate - startDate);
+	
+	
+	console.log(d);
+	
+	if(d/1000 <= 45){
+		return "a few seconds ago";
+	}
+	
+	if(d/1000 <= 90){
+		return "a minute ago";
+	}
+	
+	if(d<= 45*1000*60){
+		//var m = (endDate.getUTCMinutes - startDate.getUTCMinutes);
+		
+		console.log(d/1000/60);
+		return  Math.round(d/1000/60) + " minutes ago";
+	}*/
+	
+	//return str;
+	throw new Error('Not implemented');
 }
 
 
@@ -565,7 +576,34 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-throw new Error('Not implemented');
+	var arr = new Array();
+	var arr1 = new Array();
+	var strres = new String();
+	
+	var min = 20000;
+	
+	for(var i = 0; i < pathes.length; i++){
+		arr = pathes[i].split("/");
+		arr1[i] = arr;
+		if(arr.length < min){
+			min = arr.length;
+		}
+	}
+	
+	for(var i = 0; i < min; i++){
+	    var flag = true;
+		var str = arr1[0][i];
+		for(var j = 1; j < arr1.length; j++){
+			if(arr1[j][i] != str){
+				flag = false;
+			}
+		}
+		if(flag == true){
+			strres += str + '/';
+		}
+	}
+	
+	return strres;
 }
 
 
@@ -588,7 +626,24 @@ throw new Error('Not implemented');
  *
  */
 function getMatrixProduct(m1, m2) {
-   throw new Error('Not implemented');
+   var m3 = new Array();
+   var i = 0;
+   var s = 0;
+   
+   for(var i = 0; i < m1.length; i++){
+	   m3[i] = [];
+   }
+  
+   for(var s = 0; s< m2[0].length; s++){
+      for(var i = 0; i < m1.length; i++){   
+	     var Sum = 0;
+	     for(var j = 0; j < m2.length; j++){
+		     Sum+=m1[i][j] * m2[j][s];
+	     }
+	     m3[i][s] = Sum;
+	  }
+   }
+   return m3;
 }
 
 
@@ -623,7 +678,71 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-    throw new Error('Not implemented');
+	for(var s = 0; s < position.length; s++){
+      for(var i = 0; i < position.length; i++){
+		  var count = 0;
+		  for(var j = 0; j < position[i].length; j++){
+			  if(position[i][j] == position[s][0] && position[s][0] != ' '){
+				  count ++; 
+			  } 
+		  }
+		  if(count == 3){
+			//  console.log(1);
+			  return position[s][0];
+		  }
+		  
+	  }
+	}
+	
+	for(var s = 0; s < position.length; s++){
+      for(var i = 0; i < position.length; i++){
+		  var count = 0;
+		  for(var j = 0; j < position[i].length; j++){
+			  if(position[j][i] == position[0][s] && position[s][0] != ' '){
+				  count ++; 
+			  } 
+		  }
+		  if(count == 3){
+            //  console.log(2);
+			  return position[0][s];
+		  }
+		  
+	  }
+	}
+	
+	var str = new String(position[0][0]);
+	var count = 0;
+	for(var s = 0; s < position.length; s++){
+      for(var i = 0; i < position.length; i++){
+		if(i == s && str == position[s][i] && position[s][i] != ' '){
+			count++;
+		}		  
+	  }
+	}
+	
+	if(count == 3){
+		//console.log(3);
+	  return position[0][0];
+	}
+	
+	var str = new String(position[0][position.length - 1]);
+	var count = 0;
+	for(var s = 0; s < position.length; s++){
+      for(var i = 0; i < position.length; i++){
+		if(i + s == 2 && str == position[s][i] && position[s][i] != ' '){
+			count++;
+		}		  
+	  }
+	}
+	
+	if(count == 3){
+		//console.log(4);
+	  return position[0][position.length - 1];
+	}
+	
+	var str = new String('undefined');
+	return undefined;
+	
 }
 
 

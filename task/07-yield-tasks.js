@@ -33,7 +33,29 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+    var index = 99;
+	while(index > 1){
+		var str = "" + index + " bottles of beer on the wall, " +
+		index + " bottles of beer.";
+		yield str;
+		
+		if (index == 2) {
+		    str = "Take one down and pass it around, " +
+		          (index - 1) + " bottle of beer on the wall.";
+		} else {
+		    str = "Take one down and pass it around, " +
+		          (index - 1) + " bottles of beer on the wall.";
+		}
+		yield str;
+		
+	    index--;
+	}
+	
+    yield '1 bottle of beer on the wall, 1 bottle of beer.';
+    yield 'Take one down and pass it around, no more bottles of beer on the wall.';
+    yield 'No more bottles of beer on the wall, no more bottles of beer.';
+    yield 'Go to the store and buy some more, 99 bottles of beer on the wall.';
+	
 }
 
 
@@ -47,7 +69,20 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+	var num1 = 0;
+	var num2 = 1;
+	var num3 = 0;
+	
+	yield num1;
+	yield num2;
+	
+	while (num1 < 40000000) {
+		yield (num1 + num2);
+		
+		num3 = num1;
+		num1 = num2;
+		num2 = num3 + num1;
+	}
 }
 
 
@@ -82,9 +117,51 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
-}
+	/*//console.log(root.n);
 
+	yield "node" + root.n;
+	
+	//console.log("length: " + root.children.length);
+	if (Array.isArray(root.children) && root.children.length > 0) {
+	for (var i = 0; i < root.children.length; i++) {
+		//console.log("node: " + node.n);
+		depthTraversalTree(root.children[i]);
+		//yield root.children[i];
+	}
+	}*/
+	
+  /*let arrRoot = [];
+  let lastChild = '';
+  let i;
+   
+  arrRoot.push(root);  
+  yield root;
+  
+  while (root) { 
+ 
+     if (root.children) {
+      
+       i = root.children.indexOf(lastChild);
+       root = root.children[i+1];
+         
+       if (root) {
+          lastChild = '';
+          arrRoot.push(root);
+          yield root;            
+            
+       } else {
+          lastChild = arrRoot.pop();
+          root = arrRoot[arrRoot.length-1] || null; 
+       }   
+      
+    } else {
+ 
+      lastChild = arrRoot.pop();
+      root = arrRoot[arrRoot.length-1] || null;  
+    }  
+  } */
+  throw new Error('Not implemented');
+}  
 
 /**
  * Traverses a tree using the breadth-first strategy
